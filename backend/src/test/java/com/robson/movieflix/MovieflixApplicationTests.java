@@ -1,4 +1,4 @@
-package com.devsuperior.movieflix;
+package com.robson.movieflix;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

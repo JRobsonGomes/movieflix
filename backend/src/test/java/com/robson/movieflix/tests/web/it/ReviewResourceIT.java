@@ -1,9 +1,9 @@
-package com.devsuperior.movieflix.tests.web.it;
+package com.robson.movieflix.tests.web.it;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Assertions;
@@ -21,30 +21,31 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.devsuperior.movieflix.dto.GenreDTO;
-import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robson.movieflix.dto.ReviewDTO;
+import com.robson.movieflix.repositories.ReviewRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class GenreResourceIT {
+public class ReviewResourceIT {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@Autowired
-	private GenreRepository genreRepository;
+	private ObjectMapper objectMapper;
 	
 	@Autowired
-	private ObjectMapper objectMapper;
+	private ReviewRepository reviewRepository;
 	
 	@Value("${security.oauth2.client.client-id}")
 	private String clientId;
 
 	@Value("${security.oauth2.client.client-secret}")
-	private String clientSecret;	
-	
+	private String clientSecret;
+
+	private ReviewDTO newReviewDTO;
 	private String visitorUsername;
 	private String visitorPassword;
 	private String memberUsername;
@@ -57,55 +58,85 @@ public class GenreResourceIT {
 		visitorPassword = "123456";
 		memberUsername = "ana@gmail.com";
 		memberPassword = "123456";
+		
+		newReviewDTO = new ReviewDTO();
+		newReviewDTO.setText("Good good good");
+		newReviewDTO.setMovieId(1L);
 	}
 
 	@Test
-	public void findAllShouldReturnUnauthorizedWhenNotValidToken() throws Exception {
+	public void insertShouldReturnUnauthorizedWhenNotValidToken() throws Exception {
 
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
 		ResultActions result =
-				mockMvc.perform(get("/genres")
-					.contentType(MediaType.APPLICATION_JSON));
+				mockMvc.perform(post("/reviews")
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isUnauthorized());
 	}
 	
 	@Test
-	public void findAllShouldReturnAllGenresWhenVisitorAuthenticated() throws Exception {
-
+	public void insertShouldReturnForbiddenWhenVisitorAuthenticated() throws Exception {
+	
 		String accessToken = obtainAccessToken(visitorUsername, visitorPassword);
 		
-		long countGenres = genreRepository.count();		
-
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
 		ResultActions result =
-				mockMvc.perform(get("/genres")
-					.header("Authorization", "Bearer " + accessToken)
-					.contentType(MediaType.APPLICATION_JSON));
+				mockMvc.perform(post("/reviews")
+						.header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
 
-		result.andExpect(status().isOk());
-		Assertions.assertEquals(countGenres, getGenres(result).length);
+		result.andExpect(status().isForbidden());
 	}
 	
 	@Test
-	public void findAllShouldReturnAllGenresWhenMemberAuthenticated() throws Exception {
-
+	public void insertShouldInsertReviewWhenMemberAuthenticatedAndValidData() throws Exception {
+		
 		String accessToken = obtainAccessToken(memberUsername, memberPassword);
-
-		long countGenres = genreRepository.count();		
-
+		
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
+		long expectedCount = reviewRepository.count() + 1;
+		
 		ResultActions result =
-				mockMvc.perform(get("/genres")
-					.header("Authorization", "Bearer " + accessToken)
-					.contentType(MediaType.APPLICATION_JSON));
-
-		result.andExpect(status().isOk());
-		Assertions.assertEquals(countGenres, getGenres(result).length);
+				mockMvc.perform(post("/reviews")
+						.header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isCreated());
+		result.andExpect(jsonPath("$.user").exists());
+		result.andExpect(jsonPath("$.user.id").exists());
+		result.andExpect(jsonPath("$.user.name").exists());
+		result.andExpect(jsonPath("$.user.email").value(memberUsername));
+		Assertions.assertEquals(expectedCount, reviewRepository.count());
 	}
 
-	private GenreDTO[] getGenres(ResultActions result) throws Exception {
-		String json = result.andReturn().getResponse().getContentAsString();
-		return objectMapper.readValue(json, GenreDTO[].class);
+	@Test
+	public void insertShouldReturnUnproccessableEntityWhenMemberAuthenticatedAndInvalidData() throws Exception {
+		
+		String accessToken = obtainAccessToken(memberUsername, memberPassword);
+		
+		newReviewDTO.setText("     ");
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
+		ResultActions result =
+				mockMvc.perform(post("/reviews")
+						.header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
+
+		result.andExpect(status().isUnprocessableEntity());
 	}
-	
+
 	private String obtainAccessToken(String username, String password) throws Exception {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -123,5 +154,5 @@ public class GenreResourceIT {
 
 		JacksonJsonParser jsonParser = new JacksonJsonParser();
 		return jsonParser.parseMap(resultString).get("access_token").toString();
-	}	
+	}
 }
