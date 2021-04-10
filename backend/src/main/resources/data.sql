@@ -1,12 +1,36 @@
-INSERT INTO tb_user (name, email, password) VALUES ('Alex Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (name, email, password) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (name, email, password) VALUES ('Ana', 'ana@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_VISITOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_MEMBER');
-INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
 
-INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 2);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 3);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+
+INSERT INTO tb_genre (name) VALUES ('Ficção científica');
+INSERT INTO tb_genre (name) VALUES ('Ação');
+INSERT INTO tb_genre (name) VALUES ('Drama');
+INSERT INTO tb_genre (name) VALUES ('Aventura');
+INSERT INTO tb_genre (name) VALUES ('Comédia');
+INSERT INTO tb_genre (name) VALUES ('História');
+
+
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Godzilla vs. Kong', 'Um dos dois cairá.', 2021, 'https://www.themoviedb.org/t/p/original/pX0xvPSj6GUBRpf0thzZSZsekQK.jpg', 'Em uma época em que os monstros andam na Terra, a luta da humanidade por seu futuro coloca Godzilla e Kong em rota de colisão que verá as duas forças mais poderosas da natureza no planeta se confrontarem em uma batalha espetacular para as idades. Enquanto Monarch embarca em uma missão perigosa em terreno desconhecido e descobre pistas sobre as origens dos Titãs, uma conspiração humana ameaça tirar as criaturas, boas e más, da face da terra para sempre.', 1);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Liga da Justiça de Zack Snyder', 'Caído. Ressuscitado. Unidos.', 2021, 'https://www.themoviedb.org/t/p/original/4iTd1FoDuNZmXA16vpwfaPc2dl7.jpg', 'Determinado a garantir que o sacrifício final do Superman não foi em vão, Bruce Wayne alinha forças com Diana Prince com planos de recrutar uma equipe de metahumanos para proteger o mundo de uma ameaça de proporções catastróficas que se aproxima.', 2);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('O Jogo da Imitação', 'O verdadeiro enigma estava no homem que desvendou o código.', 2014, 'https://www.themoviedb.org/t/p/original/3YJZUjqLS424Ujy3qAJBXf5sSxO.jpg', 'Em 1939, a recém-criada agência de inteligência britânica MI6 recruta Alan Turing, um aluno da Universidade de Cambridge, para entender códigos nazistas, incluindo o "Enigma", que criptógrafos acreditavam ser inquebrável. A equipe de Turing, incluindo Joan Clarke, analisa as mensagens de "Enigma", enquanto ele constrói uma máquina para decifrá-las.', 6);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Mundo em Caos', 'Ninguém escapa do ruído.', 2021, 'https://www.themoviedb.org/t/p/original/qCPLtXrTB10UsgAFxsWOB44gDPu.jpg', 'Em um futuro não muito distante, em um mundo onde as mulheres desapareceram e os homens foram afetados pelo “ruído” – uma força que deixa seus pensamentos audíveis – Todd Hewitt encontra Viola, uma jovem misteriosa que aterrissou em seu planeta. Com Viola correndo perigo, Todd jura protegê-la e colocá-la fora de perigo. Para salvá-la, Todd terá que controlar seu “ruído”, descobrir sua própria força e desvendar todos os segredos sombrios que seu planeta e sua comunidade guardam.', 4);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Os Croods 2: Uma Nova Era', 'A sobrevivência que lute.', 2020, 'https://www.themoviedb.org/t/p/original/mqmHhAf7OhJq5Tq81p7wFI0Fnde.jpg', 'Em Croods 2: Uma Nova Era, em busca de um habitat mais seguro, os Croods descobrem um paraíso que atende todas as suas necessidades. Entretanto, outras pessoas já moram neste lugar: Os Bettermans, uma família que se considera melhor e mais evoluída. À medida que as tensões entre os novos vizinhos começam a aumentar, uma nova ameaça impulsiona os dois clãs em uma aventura épica que os força abraçar suas diferenças, extrair forças um do outro e construir um futuro juntos.', 5);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Mulher-Maravilha 1984', 'Uma nova era de maravilhas começa.', 2020, 'https://www.themoviedb.org/t/p/original/kSNojkWwSZWsYv0Xj1gcq88okzY.jpg', 'Em 1984, Diana Prince entra em conflito com dois inimigos formidáveis, Maxwell Lord e a Mulher-Leopardo, enquanto reencontra misteriosamente com seu antigo interesse amoroso Steve Trevor.', 2);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Coringa', 'Coloque um sorriso nessa cara.', 2019, 'https://www.themoviedb.org/t/p/original/qR1yyZe3X14opqBmeHRLXmfVcot.jpg', 'Arthur Fleck trabalha como palhaço para uma agência de talentos e, toda semana, precisa comparecer a uma agente social, devido aos seus conhecidos problemas mentais. Após ser demitido, Fleck reage mal à gozação de três homens em pleno metrô e os mata. Os assassinatos iniciam um movimento popular contra a elite de Gotham City, da qual Thomas Wayne é seu maior representante.', 3);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Tom & Jerry - O Filme', 'Melhores inimigos. Piores amigos.', 2021, 'https://www.themoviedb.org/t/p/original/69USXLJEXcgMzlhZi7bmaCORxHn.jpg', 'Um gato de rua chamado Tom é contratado por uma garota chamada Kayla, uma jovem empregada que trabalha em um hotel glamouroso em Nova York, para se livrar de Jerry, um rato travesso que se mudou para o hotel, antes que ele seja a ruína de um importante casamento.', 5);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Mortal Kombat Legends: A Vingança de Scorpion', '', 2020, 'https://www.themoviedb.org/t/p/original/vw3zNfzvnVNF7nIjpiEgcdznfeC.jpg', 'Após o massacre cruel de sua família pelo mercenário Sub-Zero, Hanzo Hasashi é exilado no tortuoso Netherrealm, lá, em troca de sua servidão ao sinistro Quan Chi, ele tem a chance de vingar sua família - e ressuscita como Scorpion, uma alma perdida e vingativa. De volta ao Earthrealm, Lord Raiden reúne uma equipe de guerreiros de elite - o monge Shaolin Liu Kang, a oficial das Forças Especiais Sonya Blade e o ator de ação Johnny Cage - um grupo improvável de heróis com uma chance de salvar a humanidade. Para fazer isso, eles devem derrotar a horda de gladiadores do Outworld de Shang Tsung e vencer o torneio Mortal Kombat.', 2);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Zona de Combate', 'Defiant by design.', 2021, 'https://www.themoviedb.org/t/p/original/58Gl3xXEvhF557tZER55rbPiMOT.jpg', 'Em um futuro próximo, um piloto de drone e um androide ultrassecreto trabalham lado a lado no campo de batalha para evitar um ataque nuclear.', 1);
+INSERT INTO tb_movie (title, sub_title, year, img_uri, synopsis, genre_id) VALUES ('Nova Ordem Espacial', '2092, the space sweep begins!', 2021, 'https://www.themoviedb.org/t/p/original/s7vJLqL3FltBbJPMf3CteCbbU3a.jpg', 'Perseguindo detritos espaciais e sonhos distantes no ano de 2092, quatro desajustados descobrem segredos explosivos durante a tentativa de comércio de um humanoide.‎', 1);
+
+
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.', 2, 1);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Filme muito bacana que conta um pouco da história da computação.', 2, 3);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Esse filme me representa. kkkkk', 2, 6);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Da hora esse filme. ;)', 2, 9);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Scorpion é o bicho!', 2, 9);
