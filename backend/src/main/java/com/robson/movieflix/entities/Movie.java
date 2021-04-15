@@ -81,11 +81,11 @@ public class Movie implements Serializable {
 		this.year = year;
 	}
 
-	public String getImgUtl() {
+	public String getImgUri() {
 		return imgUri;
 	}
 
-	public void setImgUtl(String imgUtl) {
+	public void setImgUri(String imgUtl) {
 		this.imgUri = imgUtl;
 	}
 
