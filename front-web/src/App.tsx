@@ -1,12 +1,13 @@
+import Navbar from './components/Navbar';
+import Home from 'pages/Home';
 import './assets/styles/custom.scss';
 import './App.scss';
-import Navbar from './components/Navbar';
 
 function App() {
   return (
     <>
       <Navbar />
-      <h1>Projeto criado</h1>
+      <Home/>
     </>
   );
 }

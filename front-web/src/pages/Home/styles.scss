@@ -1,0 +1,128 @@
+.home-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.home-content-container {
+    width: 290px;
+}
+
+.text-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 33px;
+    line-height: 50px;
+    letter-spacing: -0.015em;
+
+    color: #ffffff;
+}
+
+.text-subtitle {
+    margin-top: 19px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+
+    color: #f2f2f2;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    max-width: 380px;
+    margin-top: 30px;
+}
+
+@media (min-width: 576px) {
+    .text-title {
+        font-size: 36px;
+        line-height: 53px;
+    }
+
+    .text-subtitle {
+        margin-top: 22px;
+    }
+
+    .main-image {
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 768px) {
+    .home-content-container {
+        width: 400px;
+    }
+
+    .text-title {
+        font-size: 39px;
+        line-height: 56px;
+    }
+
+    .text-subtitle {
+        margin-top: 22px;
+    }
+}
+
+@media (min-width: 992px) {
+    .home-container {
+        margin-top: 80px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-around;
+        text-align: unset;
+    }
+
+    .home-content-container {
+        padding-top: 40px;
+    }
+
+    .text-title {
+        font-size: 42px;
+        line-height: 59px;
+    }
+
+    .text-subtitle {
+        margin-top: 22px;
+        font-size: 20px;
+        line-height: 26px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-content-container {
+        margin-left: 120px;
+    }
+
+    .text-title {
+        font-size: 45px;
+        line-height: 62px;
+    }
+
+    .text-subtitle {
+        margin-top: 22px;
+        font-size: 21px;
+        line-height: 28px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .home-content-container {
+        margin-left: 150px;
+    }
+    .text-title {
+        font-size: 48px;
+        line-height: 65px;
+    }
+
+    .text-subtitle {
+        margin-top: 22px;
+        font-size: 22px;
+        line-height: 30px;
+    }
+}
