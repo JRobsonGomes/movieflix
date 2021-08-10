@@ -23,9 +23,15 @@ ul {
 a {
   text-decoration: none;
   color: unset;
-  
+
   &:hover {
     text-decoration: none;
     color: unset;
   }
+}
+
+.card-base {
+  background: #6c6c6c;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 }
