@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './styles.scss';
 
 const Navbar = () => {
@@ -5,9 +6,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-mb bg-warning main-nav">
       <div className="container-fluid">
-        <a href="nav" className="nav-logo-text">
+        <Link to="/" className="nav-logo-text">
           <h2>MovieFlix</h2>
-        </a>
+        </Link>
       </div>
     </nav>
   )
