@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "components/Navbar";
 import Catalog from "pages/Catalog";
 import Home from "pages/Home";
+import PrivateRoute from "components/Routes/PrivateRoute";
 
 const Routes = () => (
     <BrowserRouter>
@@ -10,9 +11,9 @@ const Routes = () => (
             <Route path="/" exact>
                 <Home />
             </Route>
-            <Route path="/movies">
+            <PrivateRoute path="/movies">
                 <Catalog />
-            </Route>
+            </PrivateRoute>
         </Switch>
     </BrowserRouter>
 );

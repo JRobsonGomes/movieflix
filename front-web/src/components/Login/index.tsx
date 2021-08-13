@@ -23,7 +23,6 @@ const Login = () => {
   const { from } = location.state || { from: { pathname: "/movies" } };
 
   const onSubmit = (data: FormState) => {
-    console.log(data);
     makeLogin(data)
       .then(response => {
         setHasError(false);

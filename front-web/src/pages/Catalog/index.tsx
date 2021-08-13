@@ -6,8 +6,8 @@ const Catalog = () => {
     return (
         <div className="container">
             <nav className="card-base catalog-navbar">
-                <select className="catalog-nav-select">
-                    <option selected>Selecione uma categoria</option>
+                <select defaultValue="" className="catalog-nav-select">
+                    <option value="">Selecione uma categoria</option>
                     <option value="1">Aventura</option>
                     <option value="2">Ação</option>
                     <option value="3">Drama</option>
