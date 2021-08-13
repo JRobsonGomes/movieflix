@@ -15,7 +15,7 @@ type LocationState = {
 }
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<FormState>();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormState>();
   const [hasError, setHasError] = useState(false);
   const history = useHistory();
   const location = useLocation<LocationState>();
@@ -44,18 +44,44 @@ const Login = () => {
         </div>)
       }
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("username", { required: true })}
-          className="form-control"
-          type='text'
-          placeholder='Email'
-        />
-        <input
-          {...register("password", { required: true })}
-          className="form-control"
-          type='password'
-          placeholder='Senha'
-        />
+        <div className="login-input-content">
+          <input
+            {...register("username", {
+              required: "Campo obrigatório",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Email inválido"
+              }
+            })}
+            className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+            type='text'
+            placeholder='Email'
+          />
+          {errors.username && (
+            <div className="invalid-feedback d-block">
+              {errors.username.message}
+            </div>
+          )}
+        </div>
+        <div className="login-input-content">
+          <input
+            {...register("password", {
+              required: "Campo obrigatório",
+              minLength: {
+                value: 5,
+                message: "Mínimo 5 caracteres"
+              }
+            })}
+            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+            type='password'
+            placeholder='Senha'
+          />
+          {errors.password && (
+            <div className="invalid-feedback d-block">
+              {errors.password.message}
+            </div>
+          )}
+        </div>
         <button
           className="btn btn-warning"
           type="submit"
