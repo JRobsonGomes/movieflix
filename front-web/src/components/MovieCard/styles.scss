@@ -2,23 +2,29 @@
     margin-bottom: 40px;
     margin-inline: auto;
     max-width: 260px;
+    min-height: 300px;
 }
 
 .movie-card-content {
-    padding: 10px 15px 34px 15px;
+    padding: 10px 15px 0 15px;
 
     h1 {
+        margin-bottom: 8px;
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
         line-height: 27px;
         letter-spacing: -0.015em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         color: #ffffff;
         mix-blend-mode: normal;
     }
 
     h2 {
+        margin-bottom: 3px;
         font-style: normal;
         font-weight: bold;
         font-size: 16px;
