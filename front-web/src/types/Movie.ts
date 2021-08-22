@@ -1,4 +1,4 @@
-import { Reviews } from "./Reviews";
+import { Review } from "./Review";
 
 export type Movie = {
     id: number;
@@ -8,5 +8,5 @@ export type Movie = {
     imgUri: string;
     synopsis: string;
     genreId: number;
-    reviews: Reviews[]
+    reviews: Review[]
 }

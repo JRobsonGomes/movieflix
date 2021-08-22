@@ -10,7 +10,7 @@
 }
 
 .movie-details-top-content {
-  padding: 20px;
+  padding: 20px 10px 20px 10px;
   border-radius: 10px !important;
 
   h1 {
@@ -23,6 +23,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: normal;
 
     color: #ffffff;
     mix-blend-mode: normal;
@@ -66,6 +67,7 @@
   border: 1px solid #e1e1e1;
   box-sizing: border-box;
   border-radius: 10px;
+  overflow-x: auto;
 }
 
 .movie-details-center-content {
@@ -98,6 +100,18 @@
 @media (min-width: 376px) {
   .movie-details-content-container {
     width: 350px;
+  }
+
+  .movie-details-top-content {
+    padding: 20px;
+  }
+
+  .movie-details-center-content {
+    margin-top: 20px;
+  }
+
+  .movie-details-bottom-content {
+    margin-top: 20px;
   }
 }
 
@@ -191,6 +205,10 @@
     }
   }
 
+  .sinopse-container {
+    max-height: calc(500px - 150px - 80px);
+  }
+
   .movie-details-center-content {
     margin-top: 40px;
     padding: 40px;
@@ -212,7 +230,6 @@
     padding-left: 40px;
     padding-right: 40px;
   }
-
 }
 
 @media (min-width: 1200px) {

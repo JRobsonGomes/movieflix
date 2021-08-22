@@ -1,28 +1,35 @@
-import MovieImage from '../../assets/images/movie-image.png'
-import MovieDetailsComment from './components/MovieDetailsComment';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Movie } from 'types/Movie';
+import { makePrivateRequest } from 'utils/request';
+import MovieReview from './components/MovieReview';
 import './styles.scss';
 
+type ParamsType = {
+  movieId: string;
+}
+
 const MovieDetails = () => {
+  const { movieId } = useParams<ParamsType>();
+  const [movie, setMovie] = useState<Movie>();
+
+  useEffect(() => {
+    makePrivateRequest({ url: `/movies/${movieId}` })
+      .then(response => setMovie(response.data));
+  }, [movieId]);
 
   return (
 
     <div className="movie-details-container">
       <div className="movie-details-content-container">
         <div className="card-base movie-details-top-content">
-          <img className="movie-details-image" src={MovieImage} alt="MovieImage" />
+          <img className="movie-details-image" src={movie?.imgUri} alt="MovieImage" />
           <div className="movie-details-top-right">
-            <h1> MovieDetails </h1>
-            <h2> 2020 </h2>
-            <p>O olho do inimigo está se movendo.</p>
+            <h1> {movie?.title} </h1>
+            <h2> {movie?.year} </h2>
+            <p> {movie?.subTitle} </p>
             <div className="sinopse-container">
-              O confronto final entre as forças do bem e do mal
-              que lutam pelo controle do futuro da Terra Média se aproxima.
-              Sauron planeja um grande ataque a Minas Tirith, capital de Gondor,
-              o que faz com que Gandalf e Pippin partam para o local na
-              intenção de ajudar a resistência. Um exército é reunido por
-              Theoden em Rohan, em mais uma tentativa de deter as forças de Sauron.
-              Enquanto isso, Frodo, Sam e Gollum seguem sua viagem rumo à Montanha
-              da Perdição para destruir o anel.
+              {movie?.synopsis}
             </div>
           </div>
         </div>
@@ -30,11 +37,14 @@ const MovieDetails = () => {
           <input className="form-control" type="text" placeholder="Deixe sua avaliação aqui" />
           <button className="btn btn-warning" type="submit">Salvar Avaliação</button>
         </div>
-        <div className="card-base movie-details-bottom-content">
-          <MovieDetailsComment />
-          <MovieDetailsComment />
-          <MovieDetailsComment />
-        </div>
+        {
+          movie?.reviews.length !== 0 &&
+          <div className="card-base movie-details-bottom-content">
+            {movie?.reviews.map(review => (
+              <MovieReview review={review} key={review.id} />
+            ))}
+          </div>
+        }
       </div>
     </div>
   )
