@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Movie } from 'types/Movie';
+import { isAllowedByRole } from 'utils/auth';
 import { makePrivateRequest } from 'utils/request';
+import MovieCardForm from './components/MovieCardForm';
 import MovieReview from './components/MovieReview';
 import './styles.scss';
 
@@ -12,11 +14,13 @@ type ParamsType = {
 const MovieDetails = () => {
   const { movieId } = useParams<ParamsType>();
   const [movie, setMovie] = useState<Movie>();
+  const [reloadMovie, setReloadMovie] = useState(false);
 
   useEffect(() => {
     makePrivateRequest({ url: `/movies/${movieId}` })
-      .then(response => setMovie(response.data));
-  }, [movieId]);
+    .then(response => setMovie(response.data));
+    setReloadMovie(false)
+  }, [movieId, reloadMovie]);
 
   return (
 
@@ -33,12 +37,17 @@ const MovieDetails = () => {
             </div>
           </div>
         </div>
-        <div className="card-base movie-details-center-content">
-          <input className="form-control" type="text" placeholder="Deixe sua avaliação aqui" />
-          <button className="btn btn-warning" type="submit">Salvar Avaliação</button>
-        </div>
-        {
-          movie?.reviews.length !== 0 &&
+        {isAllowedByRole(['ROLE_MEMBER']) ?
+          < MovieCardForm
+            movieId={movieId}
+            setReloadMovie={() => setReloadMovie(!reloadMovie)}
+          /> :
+          (
+            <div className="alert alert-danger mt-4 text-center" role="alert">
+              <h4>Somente membros podem avaliar</h4>
+            </div>
+          )}
+        {movie?.reviews.length !== 0 &&
           <div className="card-base movie-details-bottom-content">
             {movie?.reviews.map(review => (
               <MovieReview review={review} key={review.id} />
