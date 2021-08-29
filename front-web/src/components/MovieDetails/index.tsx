@@ -1,6 +1,6 @@
 import MovieImageLoader from 'components/MovieDetails/components/Loaders/MovieImageLoader';
 import MovieInfoLoader from 'components/MovieDetails/components/Loaders/MovieInfoLoader';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Movie } from 'types/Movie';
 import { isAllowedByRole } from 'utils/auth';
@@ -17,18 +17,20 @@ type ParamsType = {
 const MovieDetails = () => {
   const { movieId } = useParams<ParamsType>();
   const [movie, setMovie] = useState<Movie>();
-  const [reloadMovie, setReloadMovie] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const getMovie = useCallback(() => {
     setIsLoading(true);
     makePrivateRequest({ url: `/movies/${movieId}` })
       .then(response => setMovie(response.data))
       .finally(() => {
         setIsLoading(false);
-        setReloadMovie(false)
       });
-  }, [movieId, reloadMovie]);
+  }, [movieId]);
+
+  useEffect(() => {
+    getMovie()
+  }, [getMovie]);
 
   return (
 
@@ -53,7 +55,7 @@ const MovieDetails = () => {
         {isAllowedByRole(['ROLE_MEMBER']) ?
           < MovieCardForm
             movieId={movieId}
-            setReloadMovie={() => setReloadMovie(!reloadMovie)}
+            setReloadMovie={getMovie}
           /> :
           (
             <div className="alert alert-danger mt-4 text-center" role="alert">

@@ -9,7 +9,7 @@ type FormState = {
 
 type Props = {
   movieId: string;
-  setReloadMovie: Function;
+  setReloadMovie: () => void;
 }
 
 const MovieCardForm = ({ movieId, setReloadMovie }: Props) => {
