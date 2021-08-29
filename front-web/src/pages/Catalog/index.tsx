@@ -1,4 +1,5 @@
 import MovieCard from 'components/MovieCard';
+import Pagination from 'components/Paigination';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MoviesResponse } from 'types/MoviesResponse';
@@ -9,10 +10,11 @@ import './styles.scss';
 const Catalog = () => {
   const [moviesResponse, setMoviesResponse] = useState<MoviesResponse>();
   const [isLoading, setIsLoading] = useState(false);
+  const [activePage, setActivePage] = useState(0);
 
   useEffect(() => {
     const params = {
-      page: 0,
+      page: activePage,
       size: 8
     }
 
@@ -22,7 +24,7 @@ const Catalog = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [activePage]);
 
   return (
     <div className="container">
@@ -46,6 +48,13 @@ const Catalog = () => {
             ))
           )}
         </div>
+        {moviesResponse && (
+          <Pagination
+            totalPages={moviesResponse.totalPages}
+            activePage={activePage}
+            onChange={page => setActivePage(page)}
+          />
+        )}
       </div>
     </div >
   )
