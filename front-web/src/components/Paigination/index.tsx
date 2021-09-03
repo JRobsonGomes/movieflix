@@ -13,6 +13,7 @@ const Pagination = ({ totalPages, activePage, onChange }: Props) => {
   return (
     <ReactPaginate
       pageCount={totalPages}
+      forcePage={activePage}
       pageRangeDisplayed={2}
       marginPagesDisplayed={1}
       containerClassName="pagination-container"

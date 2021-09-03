@@ -1,0 +1,40 @@
+.catalog-navbar {
+    margin-top: 40px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.catalog-nav-select__control {
+    min-width: 260px;
+    padding: 6px;
+    border: 1px solid #e1e1e1;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #6c6c6c;
+    align-items: center;
+
+    color: #e1e1e1;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.015em;
+}
+
+@media (min-width: 376px) {
+    .catalog-nav-select__control {
+        width: 320px;
+    }
+}
+
+@media (min-width: 576px) {
+    .catalog-navbar {
+        display: flex;
+        justify-content: unset;
+    }
+
+    .catalog-nav-select__control {
+        width: 260px;
+    }
+}

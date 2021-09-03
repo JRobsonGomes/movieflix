@@ -1,21 +1,26 @@
 import MovieCard from 'components/MovieCard';
 import Pagination from 'components/Paigination';
+import { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Genre } from 'types/Genre';
 import { MoviesResponse } from 'types/MoviesResponse';
 import { makePrivateRequest } from 'utils/request';
 import MovieCardLoader from './components/Loaders/MovieCardLoader';
+import MovieFilter from './components/MovieFilter';
 import './styles.scss';
 
 const Catalog = () => {
   const [moviesResponse, setMoviesResponse] = useState<MoviesResponse>();
   const [isLoading, setIsLoading] = useState(false);
   const [activePage, setActivePage] = useState(0);
+  const [genre, setGenre] = useState<Genre>();
 
-  useEffect(() => {
+  const getMovies = useCallback(() => {
     const params = {
       page: activePage,
-      size: 8
+      size: 8,
+      genreId: genre?.id
     }
 
     setIsLoading(true);
@@ -24,18 +29,20 @@ const Catalog = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [activePage]);
+  }, [activePage, genre]);
+
+  useEffect(() => {
+    getMovies();
+  }, [getMovies]);
+
+  const handleChangeGenre = (genre?: Genre) => {
+    setActivePage(0);
+    setGenre(genre);
+  }
 
   return (
     <div className="container">
-      <nav className="card-base catalog-navbar">
-        <select defaultValue="" className="catalog-nav-select">
-          <option value="">Selecione uma categoria</option>
-          <option value="1">Aventura</option>
-          <option value="2">Ação</option>
-          <option value="3">Drama</option>
-        </select>
-      </nav>
+      <MovieFilter handleChangeGenre={handleChangeGenre} />
       <div className="catalog-content">
         <div className="row">
           {isLoading ? <MovieCardLoader /> : (
