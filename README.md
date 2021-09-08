@@ -22,26 +22,26 @@ Você pode fazer login usando usuário e senha abaixo:
 *senha:* 1123456  
 
 ## Layout web
-![Login](https://github.com/JRobsonGomes/movieflix/front-web/public/telas/Login.jpg)
+![Login](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Login.JPG)
 
-![Listagem](https://github.com/JRobsonGomes/movieflix/front-web/public/Listagem.jpg)
+![Listagem](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Listagem.JPG)
 
-![Detalhes filme](https://github.com/JRobsonGomes/movieflix/front-web/public/Detalhes-filme.jpg)
+![Detalhes filme](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Detalhes-filme.JPG)
 
 ## Layout web responsivo
-![Login1](https://github.com/JRobsonGomes/movieflix/front-web/public/telas/Login-responsivo.jpg)
+![Login1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/telas/Login-responsivo.JPG)
 
 
-![Listagem1](https://github.com/JRobsonGomes/movieflix/front-web/public/Login-responsivo-01.jpg)
+![Listagem1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Login-responsivo-01.JPG)
 
-![Listagem2](https://github.com/JRobsonGomes/movieflix/front-web/public/Login-responsivo-02.jpg)
+![Listagem2](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Login-responsivo-02.JPG)
 
-![Detalhes filme1](https://github.com/JRobsonGomes/movieflix/front-web/public/Detalhes-filme-responsivo-01.jpg)
+![Detalhes filme1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Detalhes-filme-responsivo-01.JPG)
 
-![Detalhes filme2](https://github.com/JRobsonGomes/movieflix/front-web/public/Detalhes-filme-responsivo-02.jpg)
+![Detalhes filme2](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Detalhes-filme-responsivo-02.JPG)
 
 ## Modelo conceitual
-![Modelo Conceitual](https://github.com/JRobsonGomes/movieflix/front-web/public/Modelo-conceitual.jpg)
+![Modelo Conceitual](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Modelo-conceitual.JPG)
 
 # Tecnologias utilizadas
 ## Back end
