@@ -29,12 +29,12 @@ Você pode fazer login usando usuário e senha abaixo:
 ![Detalhes filme](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Detalhes-filme.JPG)
 
 ## Layout web responsivo
-![Login1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/telas/Login-responsivo.JPG)
+![Login1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Login-responsivo.JPG)
 
 
-![Listagem1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Login-responsivo-01.JPG)
+![Listagem1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Listagem-responsiva-01.JPG)
 
-![Listagem2](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Login-responsivo-02.JPG)
+![Listagem2](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Listagem-responsiva-02.JPG)
 
 ![Detalhes filme1](https://github.com/JRobsonGomes/movieflix/blob/main/front-web/public/Detalhes-filme-responsivo-01.JPG)
 
