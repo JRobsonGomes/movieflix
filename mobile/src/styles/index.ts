@@ -40,6 +40,31 @@ const text = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 50,
     fontWeight: '400'
+  },
+  movieTitle: {
+    marginBottom: 5,
+    fontWeight: 'bold',
+    fontSize: 20,
+    lineHeight: 27,
+
+    color: colors.white
+  },
+  movieYear: {
+    marginBottom: 3,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    lineHeight: 22,
+
+    color: colors.warning
+  },
+  movieSubTitle: {
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 19,
+
+    color: colors.white
   }
 });
 
@@ -100,6 +125,32 @@ const theme = StyleSheet.create({
   eyes: {
     width: 30,
     height: 30
+  },
+  movieCardContainer: {
+    width: '100%',
+    marginBottom: 40,
+    backgroundColor: colors.secondary,
+    borderRadius: 4,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  movieCardContent: {
+    paddingTop: 10,
+    paddingBottom: 50,
+    paddingHorizontal: 15
+  },
+  movieCardImage: {
+    width: '100%',
+    marginTop: 26
+  },
+  scrollContainer: {
+    padding: 10,
+    backgroundColor: colors.primary
   }
 });
 
