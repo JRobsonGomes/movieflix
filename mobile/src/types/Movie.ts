@@ -1,4 +1,3 @@
-import { ImageSourcePropType } from 'react-native';
 import { Review } from './Review';
 
 export type Movie = {
@@ -6,7 +5,7 @@ export type Movie = {
   title: string;
   subTitle: string;
   year: number;
-  imgUri: ImageSourcePropType;
+  imgUri: string;
   synopsis: string;
   genreId: number;
   reviews: Review[];

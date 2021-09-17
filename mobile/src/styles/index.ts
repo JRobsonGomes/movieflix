@@ -146,6 +146,7 @@ const theme = StyleSheet.create({
   },
   movieCardImage: {
     width: '100%',
+    height: 200,
     marginTop: 26
   },
   scrollContainer: {

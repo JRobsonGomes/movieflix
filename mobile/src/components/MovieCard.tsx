@@ -10,7 +10,7 @@ type Props = {
 const MovieCard: React.FC<Props> = ({ movie }) => {
   return (
     <TouchableOpacity style={theme.movieCardContainer}>
-      <Image style={theme.movieCardImage} source={movie.imgUri} />
+      <Image style={theme.movieCardImage} source={{ uri: movie.imgUri }} />
       <View style={theme.movieCardContent}>
         <Text style={text.movieTitle}> {movie.title} </Text>
         <Text style={text.movieYear}> {movie.year} </Text>
