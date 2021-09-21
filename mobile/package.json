@@ -15,6 +15,7 @@
     "axios": "^0.21.4",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
+    "jwt-decode": "^3.1.2",
     "query-string": "^7.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",

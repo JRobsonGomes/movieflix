@@ -11,7 +11,7 @@ const colors = {
   secondary: '#6C6C6C',
   warning: '#FFC700',
   bluePill: '#407B61',
-  red: 'DF5753'
+  danger: '#dc3545'
 };
 
 const text = StyleSheet.create({
@@ -65,6 +65,30 @@ const text = StyleSheet.create({
     lineHeight: 19,
 
     color: colors.white
+  },
+  movieSinopse: {
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    textAlign: 'justify',
+    fontSize: 16,
+    lineHeight: 22,
+
+    color: colors.mediumGray
+  },
+  userName: {
+    marginLeft: 10,
+    color: colors.white,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    lineHeight: 22
+  },
+  saveBtn: {
+    textTransform: 'uppercase',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    lineHeight: 22
   }
 });
 
@@ -150,8 +174,120 @@ const theme = StyleSheet.create({
     marginTop: 26
   },
   scrollContainer: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 30,
     backgroundColor: colors.primary
+  },
+  movieDetailsTopContent: {
+    padding: 20,
+    borderRadius: 10,
+    width: '100%',
+    backgroundColor: colors.secondary,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4
+  },
+  movieDetailsImage: {
+    width: '100%',
+    height: 200
+  },
+  sinopseContainer: {
+    marginTop: 16,
+    color: colors.mediumGray,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: colors.borderGray,
+    borderRadius: 10
+  },
+  alertDanger: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    marginTop: 25,
+    borderRadius: 4,
+    width: '100%',
+    backgroundColor: colors.danger,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4
+  },
+  movieDetailsBottomContent: {
+    marginTop: 25,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    borderRadius: 4,
+    width: '100%',
+    backgroundColor: colors.secondary,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4
+  },
+  movieDetailsCommentsContainer: {
+    marginBottom: 14
+  },
+  movieDetailsIdentification: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  movieDetailsComments: {
+    padding: 10,
+    marginTop: 10,
+    textAlign: 'justify',
+    color: colors.mediumGray,
+    borderWidth: 1,
+    borderColor: colors.borderGray,
+    borderRadius: 4
+  },
+  movieDetailsCenterContent: {
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    marginTop: 25,
+    borderRadius: 4,
+    width: '100%',
+    backgroundColor: colors.secondary,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4
+  },
+  saveBtn: {
+    width: '100%',
+    height: 50,
+    backgroundColor: colors.warning,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4
+  },
+  formInput: {
+    marginBottom: 20,
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    backgroundColor: colors.white,
+    borderColor: colors.white,
+    borderRadius: 4,
+    padding: 10,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 22
   }
 });
 

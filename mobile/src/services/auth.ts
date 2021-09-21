@@ -1,32 +1,66 @@
-import queryString from 'query-string';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { api, TOKEN } from '.';
+import jwtDecoded from 'jwt-decode';
 
-interface AuthProps {
-  username: string;
-  password: string;
-}
+type LoginResponse = {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+  userName: string;
+  userId: number;
+};
 
-export async function login(userInfo: AuthProps) {
-  const data = queryString.stringify({ ...userInfo, grant_type: 'password' });
+export type Role = 'ROLE_VISITOR' | 'ROLE_MEMBER';
 
-  const result = await api.post('oauth/token', data, {
-    headers: {
-      Authorization: TOKEN,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
+type AccessToken = {
+  exp: number;
+  user_name: string;
+  authorities: Role[];
+};
 
-  const { access_token } = result.data;
-  setAsyncKeys('@token', access_token);
-
-  return result;
-}
-
-async function setAsyncKeys(key: string, value: string) {
+export async function saveSessionData(loginResponse: LoginResponse) {
   try {
-    await AsyncStorage.setItem(key, value);
+    await AsyncStorage.setItem('@token', JSON.stringify(loginResponse));
   } catch (e) {
     console.warn(e);
   }
 }
+
+export async function getSessionData() {
+  const sessionData = await AsyncStorage.getItem('@token');
+  const parsedSessionData = JSON.parse(sessionData ?? '{}');
+
+  return parsedSessionData as LoginResponse;
+}
+
+export const getAccessTokenDecoded = async () => {
+  const sessionData = await getSessionData();
+
+  try {
+    const tokenDecoded = jwtDecoded(sessionData.access_token);
+    return tokenDecoded as AccessToken;
+  } catch (error) {
+    return {} as AccessToken;
+  }
+};
+
+export const isTokenValid = async () => {
+  const { exp } = await getAccessTokenDecoded();
+
+  return Date.now() <= exp * 1000;
+};
+
+export const isAuthenticated = async () => {
+  const sessionData = await getSessionData();
+
+  return sessionData.access_token && isTokenValid();
+};
+
+export const isAllowedByRole = async (routeRoles: Role[] = []) => {
+  if (routeRoles.length === 0) {
+    return true;
+  }
+  const { authorities } = await getAccessTokenDecoded();
+
+  return routeRoles.some((role) => authorities?.includes(role));
+};

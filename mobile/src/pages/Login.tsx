@@ -3,21 +3,22 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import eyesOpened from '../assets/eyes-opened.png';
 import eyesClosed from '../assets/eyes-closed.png';
 import { text, theme } from '../styles';
-import { login } from '../services/auth';
+import { saveSessionData } from '../services/auth';
 import { useNavigation } from '@react-navigation/native';
+import { login } from '../services/requests';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
-  const [userFetchData, setUserFetchData] = useState({});
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: ''
   });
 
   async function handlerLogin() {
-    const data = await login(userInfo);
-    setUserFetchData(data);
+    login(userInfo).then((res) => {
+      saveSessionData(res.data);
+    });
     navigation.navigate('Catalog');
   }
 
