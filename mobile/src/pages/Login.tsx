@@ -18,8 +18,8 @@ const Login: React.FC = () => {
   async function handlerLogin() {
     login(userInfo).then((res) => {
       saveSessionData(res.data);
+      navigation.navigate('Catalog');
     });
-    navigation.navigate('Catalog');
   }
 
   return (

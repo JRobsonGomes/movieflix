@@ -27,8 +27,8 @@ export async function saveSessionData(loginResponse: LoginResponse) {
 }
 
 export async function getSessionData() {
-  const sessionData = await AsyncStorage.getItem('@token');
-  const parsedSessionData = JSON.parse(sessionData ?? '{}');
+  const sessionData = (await AsyncStorage.getItem('@token')) ?? '{}';
+  const parsedSessionData = JSON.parse(sessionData);
 
   return parsedSessionData as LoginResponse;
 }
