@@ -291,4 +291,35 @@ const theme = StyleSheet.create({
   }
 });
 
-export { colors, theme, text };
+const nav = StyleSheet.create({
+  leftText: {
+    color: colors.black,
+    fontWeight: 'bold',
+    fontSize: 24,
+    lineHeight: 33
+  },
+  homeBtn: {
+    height: '100%',
+    padding: 10,
+    justifyContent: 'center'
+  },
+  logoutText: {
+    color: colors.black,
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 19,
+    textTransform: 'uppercase'
+  },
+  logoutBtn: {
+    width: 100,
+    height: 30,
+    borderWidth: 1,
+    borderColor: colors.black,
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10
+  }
+});
+
+export { colors, theme, text, nav };

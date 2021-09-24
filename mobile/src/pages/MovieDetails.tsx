@@ -3,9 +3,8 @@ import { View, Text, ActivityIndicator, Image, ScrollView } from 'react-native';
 import { makePrivateRequest } from '../services/requests';
 import { colors, text, theme } from '../styles';
 import { Movie } from '../@types/Movie';
-import { isAllowedByRole, Role } from '../services/auth';
-import MovieCardForm from '../components/MovieCardForm';
-import MovieReview from '../components/MovieReview';
+import { isAllowedByRole } from '../services/auth';
+import { MovieCardForm, MovieReview } from '../components';
 
 type ParamList = {
   route: {

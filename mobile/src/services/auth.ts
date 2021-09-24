@@ -64,3 +64,11 @@ export const isAllowedByRole = async (routeRoles: Role[] = []) => {
 
   return routeRoles.some((role) => authorities?.includes(role));
 };
+
+export async function doLogout() {
+  try {
+    await AsyncStorage.removeItem('@token');
+  } catch (e) {
+    console.warn(e);
+  }
+}
