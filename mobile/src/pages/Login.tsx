@@ -1,46 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import eyesOpened from '../assets/eyes-opened.png';
 import eyesClosed from '../assets/eyes-closed.png';
 import { text, theme } from '../styles';
-import { isAuthenticated, saveSessionData } from '../services/auth';
-import { useNavigation } from '@react-navigation/native';
-import { login } from '../services/requests';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login: React.FC = () => {
-  const navigation = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: ''
   });
-  const [authenticated, setAuthenticated] = useState(false);
+  const { signIn } = useAuth();
 
   async function handlerLogin() {
-    login(userInfo)
-      .then((res) => {
-        saveSessionData(res.data);
-        setAuthenticated(true);
-        navigation.navigate('Catalog');
-      })
-      .catch(() => {
-        console.warn('Erro ao fazer login');
-        navigation.navigate('Login');
-      });
+    signIn(userInfo);
   }
-
-  const logged = useCallback(async () => {
-    const result = await isAuthenticated();
-
-    result ? setAuthenticated(true) : setAuthenticated(false);
-    if (authenticated) {
-      navigation.navigate('Catalog');
-    }
-  }, [authenticated, navigation]);
-
-  useEffect(() => {
-    logged();
-  }, [logged]);
 
   return (
     <View style={theme.container}>

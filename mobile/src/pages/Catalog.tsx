@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView } from 'react-native';
+import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
 import { colors, theme } from '../styles';
 import { MovieCard } from '../components';
 import { makePrivateRequest } from '../services/requests';
 import { MoviesResponse } from '../@types/MoviesResponse';
-import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext';
 
 const Catalog: React.FC = () => {
   // const [movies, setMovies] = useState<Movie[]>([]);
   const [moviesResponse, setMoviesResponse] = useState<MoviesResponse>();
   const [loading, setLoading] = useState(false);
   const [activePage, setActivePage] = useState(0);
-  const navigation = useNavigation();
+  const { signOut } = useAuth();
 
   const getMovies = useCallback(() => {
     const params = {
@@ -24,25 +24,36 @@ const Catalog: React.FC = () => {
     makePrivateRequest({ url: '/movies', params })
       .then((response) => setMoviesResponse(response.data))
       .catch(() => {
-        console.warn('Erro ao logar');
-        navigation.navigate('Login');
+        Alert.alert('Erro ao listar filmes?', 'Tente novamente mais tarde!', [
+          {
+            text: 'Voltar',
+            onPress: () => signOut(),
+            style: 'cancel'
+          }
+        ]);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [activePage, navigation]);
+  }, [activePage, signOut]);
 
   useEffect(() => {
     getMovies();
   }, [getMovies]);
 
+  if (loading) {
+    return (
+      <View style={theme.loadContainer}>
+        <ActivityIndicator size="large" color={colors.warning} />
+      </View>
+    );
+  }
+
   return (
     <ScrollView contentContainerStyle={theme.scrollContainer}>
-      {loading ? (
-        <ActivityIndicator size="large" color={colors.mediumGray} />
-      ) : (
-        moviesResponse?.content.map((movie) => <MovieCard movie={movie} key={movie.id} />)
-      )}
+      {moviesResponse?.content.map((movie) => (
+        <MovieCard movie={movie} key={movie.id} />
+      ))}
     </ScrollView>
   );
 };

@@ -42,12 +42,12 @@ const MovieDetails: React.FC<ParamList> = ({
       <ScrollView>
         <View style={theme.movieDetailsTopContent}>
           {isLoading ? (
-            <ActivityIndicator size="large" color={colors.mediumGray} />
+            <ActivityIndicator size="large" color={colors.warning} />
           ) : (
             <Image style={theme.movieDetailsImage} source={{ uri: movie?.imgUri }} />
           )}
           {isLoading ? (
-            <ActivityIndicator size="large" color={colors.mediumGray} />
+            <ActivityIndicator size="large" color={colors.warning} />
           ) : (
             <View>
               <Text style={text.movieTitle}> {movie?.title} </Text>
@@ -69,7 +69,7 @@ const MovieDetails: React.FC<ParamList> = ({
         )}
         {isLoading ? (
           <View style={theme.movieDetailsBottomContent}>
-            <ActivityIndicator size="large" color={colors.mediumGray} />
+            <ActivityIndicator size="large" color={colors.warning} />
           </View>
         ) : (
           movie?.reviews.length !== 0 && (

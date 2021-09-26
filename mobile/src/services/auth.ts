@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwtDecoded from 'jwt-decode';
 
-type LoginResponse = {
+export type LoginResponse = {
   access_token: string;
   token_type: string;
   expires_in: number;
@@ -20,14 +20,14 @@ type AccessToken = {
 
 export async function saveSessionData(loginResponse: LoginResponse) {
   try {
-    await AsyncStorage.setItem('@token', JSON.stringify(loginResponse));
+    await AsyncStorage.setItem('@authData', JSON.stringify(loginResponse));
   } catch (e) {
     console.warn(e);
   }
 }
 
 export async function getSessionData() {
-  const sessionData = (await AsyncStorage.getItem('@token')) ?? '{}';
+  const sessionData = (await AsyncStorage.getItem('@authData')) ?? '{}';
   const parsedSessionData = JSON.parse(sessionData);
 
   return parsedSessionData as LoginResponse;
@@ -67,7 +67,7 @@ export const isAllowedByRole = async (routeRoles: Role[] = []) => {
 
 export async function doLogout() {
   try {
-    await AsyncStorage.removeItem('@token');
+    await AsyncStorage.clear();
   } catch (e) {
     console.warn(e);
   }

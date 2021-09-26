@@ -17,11 +17,11 @@ type RequestParams = {
   };
 };
 
-export const api = axios.create({
-  baseURL: 'https://movieflix-robson.herokuapp.com'
-});
-
 const BASE_URL = 'https://movieflix-robson.herokuapp.com';
+
+export const api = axios.create({
+  baseURL: BASE_URL
+});
 
 export const TOKEN = 'Basic bW92aWVmbGl4Om1vdmllZmxpeDEyMzQ1Ng==';
 

@@ -93,6 +93,14 @@ const text = StyleSheet.create({
 });
 
 const theme = StyleSheet.create({
+  loadContainer: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.secondary
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
