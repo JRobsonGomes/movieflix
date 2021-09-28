@@ -15,6 +15,12 @@ const colors = {
 };
 
 const text = StyleSheet.create({
+  textError: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: colors.danger,
+    marginTop: 5
+  },
   regular: {
     fontSize: 16,
     fontWeight: '400',
@@ -281,10 +287,10 @@ const theme = StyleSheet.create({
     backgroundColor: colors.warning,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 4
+    borderRadius: 4,
+    marginTop: 20
   },
   formInput: {
-    marginBottom: 20,
     width: '100%',
     height: 50,
     borderWidth: 1,

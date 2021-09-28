@@ -10,7 +10,8 @@ interface AuthProps {
 type RequestParams = {
   method?: Method;
   url: string;
-  data?: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  data?: string | object;
   params?: { page: number; size: number };
   headers?: {
     Authorization: string;
