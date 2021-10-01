@@ -102,6 +102,7 @@ const theme = StyleSheet.create({
   loadContainer: {
     width: '100%',
     height: '100%',
+    minHeight: 30,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

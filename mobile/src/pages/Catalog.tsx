@@ -1,60 +1,92 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, View } from 'react-native';
 import { colors, theme } from '../styles';
 import { MovieCard } from '../components';
 import { makePrivateRequest } from '../services/requests';
-import { MoviesResponse } from '../@types/MoviesResponse';
 import { useAuth } from '../contexts/AuthContext';
+import { Movie } from '../@types/Movie';
+
+type Props = {
+  load: boolean;
+};
 
 const Catalog: React.FC = () => {
-  // const [movies, setMovies] = useState<Movie[]>([]);
-  const [moviesResponse, setMoviesResponse] = useState<MoviesResponse>();
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const [activePage, setActivePage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const { signOut } = useAuth();
 
-  const getMovies = useCallback(() => {
+  const getMovies = useCallback(async () => {
     const params = {
       page: activePage,
-      size: 8
+      size: 4
       // genreId: genre?.id
     };
 
-    setLoading(true);
-    makePrivateRequest({ url: '/movies', params })
-      .then((response) => setMoviesResponse(response.data))
+    await makePrivateRequest({ url: '/movies', params })
+      .then((response) => {
+        setMovies([...movies, ...response.data.content]);
+        setTotalPages(response.data.totalPages);
+        setActivePage(activePage + 1);
+      })
       .catch(() => {
-        Alert.alert('Erro ao listar filmes?', 'Tente novamente mais tarde!', [
+        Alert.alert('Erro ao listar filmes!', 'Tente novamente mais tarde!', [
           {
             text: 'Voltar',
             onPress: () => signOut(),
             style: 'cancel'
           }
         ]);
-      })
-      .finally(() => {
-        setLoading(false);
       });
-  }, [activePage, signOut]);
+  }, [activePage, movies, signOut]);
+
+  const handleActivePage = () => {
+    if (totalPages > activePage) {
+      getMovies();
+    }
+  };
 
   useEffect(() => {
+    setLoading(true);
     getMovies();
-  }, [getMovies]);
 
-  if (loading) {
-    return (
-      <View style={theme.loadContainer}>
-        <ActivityIndicator size="large" color={colors.warning} />
-      </View>
-    );
+    return () => setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    handleActivePage();
+
+    return () => setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (movies.length == 0) {
+    return <FooterList load={loading} />;
   }
 
   return (
-    <ScrollView contentContainerStyle={theme.scrollContainer}>
-      {moviesResponse?.content.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} />
-      ))}
-    </ScrollView>
+    <FlatList
+      contentContainerStyle={theme.scrollContainer}
+      data={movies}
+      keyExtractor={(movie) => String(movie.id)}
+      renderItem={({ item }) => <MovieCard movie={item} key={item.id} />}
+      onEndReached={handleActivePage}
+      onEndReachedThreshold={0.1}
+      ListFooterComponent={totalPages > activePage ? <FooterList load={loading} /> : null}
+    />
+  );
+};
+
+const FooterList: React.FC<Props> = ({ load }) => {
+  if (!load) return null;
+
+  return (
+    <View style={theme.loadContainer}>
+      <ActivityIndicator size="large" color={colors.warning} />
+    </View>
   );
 };
 
