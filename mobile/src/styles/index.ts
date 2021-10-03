@@ -167,7 +167,7 @@ const theme = StyleSheet.create({
   },
   movieCardContainer: {
     width: '100%',
-    marginBottom: 40,
+    marginBottom: 30,
     backgroundColor: colors.secondary,
     borderRadius: 4,
     shadowColor: colors.black,
