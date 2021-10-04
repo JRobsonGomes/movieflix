@@ -48,11 +48,14 @@ const Catalog: React.FC = () => {
   };
 
   const handleChangeGenre = useCallback((g: Genre) => {
-    setActivePage(0);
+    /*Só setar pagina pra 0 quando genero nulo (Opção 'Todos os gênros'),
+    para não causar refresh do useEffect que depende da pagina */
+    if (g == null) {
+      setActivePage(0);
+    }
+
     setMovies([]);
     setGenre(g);
-
-    console.log(g);
   }, []);
 
   //Executa no inicio do carregamento sem dependencias
@@ -67,8 +70,6 @@ const Catalog: React.FC = () => {
   //Executa quando mudar activePage - Scroll infinito
   useEffect(() => {
     setLoading(true);
-    console.log(`TotalPage: ${totalPages}`);
-    console.log(`ActivePage: ${activePage}`);
 
     const fetchScrollData = async () => {
       const params = {
@@ -76,9 +77,13 @@ const Catalog: React.FC = () => {
         size: SIZE
       };
 
-      await makePrivateRequest({ url: '/movies', params }).then((response) => {
-        setMovies([...movies, ...response.data.content]);
-      });
+      await makePrivateRequest({ url: '/movies', params })
+        .then((response) => {
+          setMovies([...movies, ...response.data.content]);
+        })
+        .catch(() => {
+          console.log('Erro fetchScrollData');
+        });
     };
 
     if (totalPages > activePage) {
@@ -101,11 +106,13 @@ const Catalog: React.FC = () => {
         genreId: genre?.id
       };
 
-      await makePrivateRequest({ url: '/movies', params }).then((response) => {
-        setMovies(response.data.content);
-        console.log(`params ${params.genreId}`);
-        console.log(`genre ${genre}`);
-      });
+      await makePrivateRequest({ url: '/movies', params })
+        .then((response) => {
+          setMovies(response.data.content);
+        })
+        .catch(() => {
+          console.log('Erro fetchData');
+        });
     };
 
     fetchData();

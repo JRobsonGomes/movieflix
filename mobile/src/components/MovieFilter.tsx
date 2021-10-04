@@ -21,6 +21,9 @@ const MovieFilter: React.FC<Props> = ({ handleChangeGenre }) => {
         .then((response) => {
           setGenres(response.data);
         })
+        .catch(() => {
+          console.log('Erro fetchData Filtro');
+        })
         .finally(() => setIsLoadingGenres(false));
     };
 
@@ -28,28 +31,18 @@ const MovieFilter: React.FC<Props> = ({ handleChangeGenre }) => {
   }, []);
 
   return (
-    <View
-      style={[theme.movieCardContainer, { height: 60, paddingHorizontal: 20, paddingVertical: 5 }]}
-    >
-      <View
-        style={{
-          borderWidth: 1,
-          height: '100%',
-          borderBottomWidth: 1,
-          borderColor: colors.borderGray,
-          justifyContent: 'center',
-          borderRadius: 4
-        }}
-      >
+    <View style={theme.filterContainer}>
+      <View style={theme.filterContent}>
         <Picker
           style={{ color: colors.white }}
           selectedValue={selectedGenre}
+          dropdownIconColor={colors.borderGray}
           onValueChange={(value: Genre) => {
             handleChangeGenre(value);
             setSelectedGenre(value);
           }}
         >
-          <Picker.Item label="Selecione um gênero" value={null} />
+          <Picker.Item label="Todos os gêneros" value={null} />
           {!isLoadingGenres &&
             genres.map((g) => {
               return <Picker.Item label={g.name} value={g} key={g.id} />;

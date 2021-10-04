@@ -303,6 +303,30 @@ const theme = StyleSheet.create({
     fontWeight: 'normal',
     fontSize: 16,
     lineHeight: 22
+  },
+  filterContainer: {
+    width: '100%',
+    height: 60,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    marginBottom: 30,
+    backgroundColor: colors.secondary,
+    borderRadius: 4,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  filterContent: {
+    borderWidth: 1,
+    height: '100%',
+    borderBottomWidth: 1,
+    borderColor: colors.borderGray,
+    justifyContent: 'center',
+    borderRadius: 4
   }
 });
 
